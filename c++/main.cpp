@@ -22,20 +22,28 @@ void fillRandomArray(int* array, int length) {
 }
 
 void printArray(int* array, int length) {
-	int i;
+	int maxLength = 20,
+		i;
 
-	printf("[");
-	
-	for (i = 0; i < length; i++) {
+	if (length > maxLength) {
+
+		printf("[array output suppressed]\n");
+
+	} else {
+
+		printf("[");
 		
-		printf("%d", array[i]);
-		
-		if (i < length - 1) {
-			printf(", ");
+		for (i = 0; i < length; i++) {
+			
+			printf("%d", array[i]);
+			
+			if (i < length - 1) {
+				printf(", ");
+			}
 		}
-	}
 
-	printf("]\n");
+		printf("]\n");
+	}
 }
 
 int main(int argc, char** argv) {
@@ -60,7 +68,12 @@ int main(int argc, char** argv) {
 		// TODO: copy array anew for each alogorithm
 
 		printf("Sorting: \n");
+		
+		clock_t t = clock();
 		algorithms[i]->Sort(array, length);
+		double seconds = double (clock() - t) / CLOCKS_PER_SEC;
+		
+		printf("Done in %lg seconds\n", seconds);
 		printArray(array, length);
 
 		delete algorithms[i];
