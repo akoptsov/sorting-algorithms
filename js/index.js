@@ -2,10 +2,12 @@
     MAX_OUT_LENGTH = 21,
     algorithms = [
         require('./algorithms/bubble'),
+        require('./algorithms/gnomesort'),
         require('./algorithms/selection'),
         require('./algorithms/insertion'),
-        require('./algorithms/quicksort'),
         require('./algorithms/merge'),
+        require('./algorithms/radix'),
+        require('./algorithms/quicksort'),
         require('./algorithms/heapsort')
     ];
 
@@ -17,6 +19,17 @@ function log(message) {
 function logArray(array) {
     console.log(array.length < MAX_OUT_LENGTH ? array : '[array output suppressed]');
     console.log('\n');
+}
+
+function logResults(results) {
+    console.log('\tMethod\t\tTime');
+    console.log('\t=========\t=========');
+    
+    results.forEach(function (result) {
+        console.log('\t' + result.name + (result.name.length >= 8 ? '\t' : '\t\t' ) + result.time / MSEC_IN_SEC + ' sec');
+    });
+    
+    console.log();
 }
 
 function sort(array, impl) {
@@ -31,6 +44,8 @@ function sort(array, impl) {
     t = new Date() - t;
     
     log('Sorted an array of ' + array.length + ' items in '+ t / MSEC_IN_SEC + ' seconds');
+    
+    return t;
 }
 
 function validate(array) {
@@ -69,7 +84,8 @@ function makeRandomArray(length, min, max) {
 }
 
 function run(args, sorts) {
-    var SPREAD_COEFF = 5;
+    var SPREAD_COEFF = 5,
+        results = [];
     
     if (!args || !args.length) {
         log('Please provide array length as an argument');
@@ -86,15 +102,25 @@ function run(args, sorts) {
     
     logArray(array);
     
-    sorts.forEach(function (impl) {
-        var copy = array.slice();
 
-        sort(copy, impl);
+    sorts.forEach(function (impl) {
+        var copy = array.slice(),
+            time;
+
+        time = sort(copy, impl);
+
         logArray(copy);
         validate(copy);
         
+        results.push({
+            name: impl.name,
+            time: time
+        });
+        
         log();
     });
+    
+    logResults(results);
 }
 
 
