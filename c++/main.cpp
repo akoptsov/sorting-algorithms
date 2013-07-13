@@ -1,6 +1,7 @@
-#include<stdio.h>
+#include<cstdio>
 #include<ctime>
 #include<cstdlib>
+#include<cstring>
 
 #include "algorithms/algorithms.h"
 
@@ -49,28 +50,32 @@ void printArray(int* array, int length) {
 int main(int argc, char** argv) {
 	int length = 20;
 
-	ISort** algorithms = new ISort*[1];
+	ISort** algorithms = new ISort*[2];
 	algorithms[0] = new BubbleSort();
+	algorithms[1] = new GnomeSort();
 
-	int count = 1,
+	int count = 2,
 		i;
 	
 	if (argc > 1) {
 		length = atoi(argv[1]);
 	}
 
-	int* array = new int[length];
+	int *base  = new int[length],
+		*array = new int[length];
 
-	fillRandomArray(array, length);
-	printArray(array, length);
+
+	fillRandomArray(base, length);
+	printArray(base, length);
 	
 	for (i = 0; i < count; i++) {
-		// TODO: copy array anew for each alogorithm
+		memcpy(array, base, length * sizeof(int));
 
-		printf("Sorting: \n");
-		
+		printf("\n");
+		printf("Sorting with %s algorithm: \n", algorithms[i]->name);
+
 		clock_t t = clock();
-		algorithms[i]->Sort(array, length);
+		algorithms[i]->sort(array, length);
 		double seconds = double (clock() - t) / CLOCKS_PER_SEC;
 		
 		printf("Done in %lg seconds\n", seconds);
