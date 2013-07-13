@@ -4,7 +4,15 @@
 class ISort {
 	
 	public:
-		virtual void Sort(int *array, int length) = 0;
+		
+		const char* name;
+		virtual void sort(int *array, int length) = 0;
+
+	protected:
+
+		ISort(const char* name) {
+			this->name = name;
+		}
 };
 
 void swap(int *array, int i1, int i2);

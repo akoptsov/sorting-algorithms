@@ -1,7 +1,7 @@
 #include "commons/commons.h"
 #include "bubble.h"
 
-void BubbleSort::Sort(int *array, int length) {
+void BubbleSort::sort(int *array, int length) {
 
 	int  i, current, next;
 	bool sorted;
