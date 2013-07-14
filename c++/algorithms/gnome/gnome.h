@@ -1,7 +1,7 @@
 #ifndef _GNOME_H_
 #define _GNOME_H_
 
-#include "commons/commons.h"
+#include "../commons/commons.h"
 
 class GnomeSort: public ISort {
 	
