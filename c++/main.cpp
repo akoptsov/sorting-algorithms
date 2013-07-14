@@ -1,7 +1,7 @@
-#include<cstdio>
-#include<ctime>
-#include<cstdlib>
-#include<cstring>
+#include <cstdio>
+#include <ctime>
+#include <cstdlib>
+#include <cstring>
 
 #include "algorithms/algorithms.h"
 
@@ -48,14 +48,15 @@ void printArray(int* array, int length) {
 }
 
 int main(int argc, char** argv) {
-	int length = 20;
+	int length = 20,
+		count = 4,
+		i;
 
-	ISort** algorithms = new ISort*[2];
+	ISort** algorithms = new ISort*[count];
 	algorithms[0] = new BubbleSort();
 	algorithms[1] = new GnomeSort();
-
-	int count = 2,
-		i;
+	algorithms[2] = new SelectionSort();
+	algorithms[3] = new InsertionSort();
 	
 	if (argc > 1) {
 		length = atoi(argv[1]);
@@ -85,5 +86,7 @@ int main(int argc, char** argv) {
 	}
 	
 	delete[] algorithms;
+	delete[] base;
 	delete[] array;
+
 }
