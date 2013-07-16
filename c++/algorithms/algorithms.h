@@ -6,6 +6,7 @@
 #include "gnome/gnome.h"
 #include "selection/selection.h"
 #include "insertion/insertion.h"
+#include "quicksort/quicksort.h"
 
 
 #endif /* _ALGORITHMS_H_ */

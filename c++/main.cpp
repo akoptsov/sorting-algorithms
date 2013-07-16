@@ -49,7 +49,7 @@ void printArray(int* array, int length) {
 
 int main(int argc, char** argv) {
 	int length = 20,
-		count = 4,
+		count = 5,
 		i;
 
 	ISort** algorithms = new ISort*[count];
@@ -57,6 +57,7 @@ int main(int argc, char** argv) {
 	algorithms[1] = new GnomeSort();
 	algorithms[2] = new SelectionSort();
 	algorithms[3] = new InsertionSort();
+	algorithms[4] = new QuickSort();
 	
 	if (argc > 1) {
 		length = atoi(argv[1]);
